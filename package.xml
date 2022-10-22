@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>open_loop_wheel_odometry</name>
+  <version>1.0.0</version>
+  <description>Open-loop odometry for diff-drive controller (and possibly others, too).</description>
+
+  <author email="peckama2@fel.cvut.cz">Martin Pecka</author>
+  <maintainer email="peckama2@fel.cvut.cz">Martin Pecka</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://github.com/ctu-vras/open_loop_wheel_odometry</url> 
+  <url type="issues">http://github.com/ctu-vras/open_loop_wheel_odometry/issues</url> 
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>roscpp</depend>
+  <depend>topic_tools</depend>
+
+  <build_depend>cras_cpp_common</build_depend>
+  <build_depend>diff_drive_controller</build_depend>
+  <build_depend>eigen</build_depend>
+  <build_depend>tf2</build_depend>
+  <build_depend>tf2_geometry_msgs</build_depend>
+
+  <exec_depend>cras_cpp_common</exec_depend>
+  <exec_depend>diff_drive_controller</exec_depend>
+  <exec_depend>tf2</exec_depend>
+  <exec_depend>tf2_geometry_msgs</exec_depend>
+</package>
