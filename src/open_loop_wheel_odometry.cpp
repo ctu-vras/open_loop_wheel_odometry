@@ -133,7 +133,7 @@ void OpenLoopWheelOdom::update(const geometry_msgs::Twist& msg, const ros::Time&
 
   if (!this->initialized)
   {
-    this->odom->init(ros::Time::now());
+    this->odom->init(stamp);
     this->lastTime = ros::Time::now();
     this->lastMeasurementTime = stamp;
     this->lastMsg = msg;

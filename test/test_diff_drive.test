@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: BSD-3-Clause -->
+<!-- SPDX-FileCopyrightText: Czech Technical University in Prague -->
+<launch>
+    <test test-name="diff_drive" pkg="open_loop_wheel_odometry" type="test_diff_drive.py" />
+    <node name="cmd_vel_odom" pkg="open_loop_wheel_odometry" type="diff_drive_odom">
+        <param name="base_link_frame" value="base_link" />
+    </node>
+    <node name="cmd_vel_odom_stamped" pkg="open_loop_wheel_odometry" type="diff_drive_odom">
+        <param name="base_link_frame" value="base_link" />
+        <remap from="cmd_vel_out" to="cmd_vel_out_stamped" />
+        <remap from="odom_cmd_vel" to="odom_cmd_vel_stamped" />
+    </node>
+</launch>

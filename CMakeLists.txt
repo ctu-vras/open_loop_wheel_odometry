@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.7.2)
 project(open_loop_wheel_odometry)
 
 find_package(catkin REQUIRED COMPONENTS
@@ -40,15 +40,16 @@ install(DIRECTORY include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 
-#############
-## Testing ##
-#############
+if (CATKIN_ENABLE_TESTING)
+  find_package(roslint REQUIRED)
+  find_package(rostest REQUIRED)
 
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_open_loop_wheel_odometry.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
+  # catkin_lint - checks validity of package.xml and CMakeLists.txt
+  # ROS buildfarm calls this without any environment, so we have problems reading the list of packages from env
+  # see https://github.com/ros-infrastructure/ros_buildfarm/issues/923
+  if(DEFINED ENV{ROS_ROOT})
+    roslint_custom(catkin_lint "-W2" .)
+  endif()
 
-## Add folders to be run by python nosetests
-# catkin_add_nosetests(test)
+  add_rostest(test/test_diff_drive.test)
+endif()
