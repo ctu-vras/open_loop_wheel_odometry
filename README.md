@@ -2,9 +2,9 @@
 
 Open-loop odometry for diff-drive controller (and possibly others, too). This can be used to turn `cmd_vel` commands into odometry via a very simple no-feedback integration algorithm.
 
-Currently, only diff-drive model is supported. This implementation is guaranteed to give the same results as `diff_drive_controller` with `open_loop` parameter set to `True`.
+Currently, only diff-drive and Ackermann steering models are supported. This implementation is guaranteed to give the same results as `diff_drive_controller`/`ackermann_steering_controller` with `open_loop` parameter set to `True`.
 
-More models can be added (e.g. Ackermann) if needed.
+More models can be added if needed.
 
 This node correctly handles covariance (if you correctly specify the initial values). Especially, position covariance is growing without bounds.
 
@@ -14,7 +14,7 @@ These properties are common to all implementations.
 
 ### Subscribed topics
 
-- `cmd_vel_out` (`geometry_msgs/Twist` or `geometry_msgs/TwistStamped`): The cmd\_vel commands to integrate. Name of this topic corresponds to the `diff_drive_controller` velocity output topic, i.e. the commanded velocity after all limits are applied. It usually makes sense to compute the odometry from the real values sent to the motors and not from the desired values.
+- `cmd_vel_out` (`geometry_msgs/Twist` or `geometry_msgs/TwistStamped`): The cmd\_vel commands to integrate. Name of this topic corresponds to the `diff_drive_controller` velocity output topic, i.e. the commanded velocity after all limits are applied. It usually makes sense to compute the odometry from the real values sent to the motors and not from the desired values. Please note that the Ackermann steering controller doesn't have this output.
 - `reset` (any type): Each time a message is received on this topic, the odometry is reset to its initial state.
 
 ### Published topics
@@ -27,6 +27,7 @@ These properties are common to all implementations.
 - `~base_link_frame` (`str`, by default this frame is autodetected from the receieved messages): The frame to use in `child_frame_id` of the odometry messages. If this parameter is not specified and the incoming messages are either non-stamped or they have empty `frame_id`, an error message is printed and this parameter defaults to `base_link`.
 - `~initial_pose_covariance_diagonal` (`list[float]`, default `1e-6, 1e-6, 1e-6, pi^2, pi^2, 1e-6`): Diagonal elements of the covariance of the initial state. This value has to be a 6-element list of floats, otherwise the default is used.
 - `~twist_covariance_diagonal` (`list[float]`, default `1e-2, 1e-4, 1e-1, pi^2, pi^2, 0.5`): Diagonal elements of the covariance of the received velocity commands. Elements corresponding to the unmeasured quantities should not be very small.
+- Please note there is no configuration of the diff-drive/Ackermann steering models. Their open-loop odometry just integrates the `cmd_vel` commands.
 
 ### Behavior
 

@@ -19,12 +19,16 @@
   <depend>roscpp</depend>
   <depend>topic_tools</depend>
 
+  <build_depend condition="$ROS_DISTRO == 'melodic'" version_gte="0.17.3">ackermann_steering_controller</build_depend>
+  <build_depend condition="$ROS_DISTRO == 'noetic'" version_gte="0.21.1">ackermann_steering_controller</build_depend>
   <build_depend>cras_cpp_common</build_depend>
   <build_depend>diff_drive_controller</build_depend>
   <build_depend>eigen</build_depend>
   <build_depend>tf2</build_depend>
   <build_depend>tf2_geometry_msgs</build_depend>
 
+  <exec_depend condition="$ROS_DISTRO == 'melodic'" version_gte="0.17.3">ackermann_steering_controller</exec_depend>
+  <exec_depend condition="$ROS_DISTRO == 'noetic'" version_gte="0.21.1">ackermann_steering_controller</exec_depend>
   <exec_depend>cras_cpp_common</exec_depend>
   <exec_depend>diff_drive_controller</exec_depend>
   <exec_depend>tf2</exec_depend>
